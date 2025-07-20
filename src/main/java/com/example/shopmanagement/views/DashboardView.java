@@ -13,23 +13,38 @@ import java.util.Objects;
 
 public class DashboardView {
 
+    // Used when directly showing from Main or after login
     public static void show(Stage stage) {
+        Scene scene = new Scene(getView(stage), 500, 450);
+        scene.getStylesheets().add(Objects.requireNonNull(DashboardView.class.getResource("/style.css")).toExternalForm());
+        stage.setScene(scene);
+    }
+
+    // Reusable component view (for BackButton etc.)
+    public static Parent getView(Stage stage) {
         Label title = new Label("📊 Shop Dashboard");
         title.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
 
         Button registerCustomerBtn = new Button("➕ Register Customer");
+        Button addProductBtn = new Button("📦 Add Product");
         Button newOrderBtn = new Button("🛒 New Order");
         Button viewOrdersBtn = new Button("📋 View Orders");
         Button billingBtn = new Button("💳 Billing");
         Button deliveryBtn = new Button("🚚 Delivery Status");
         Button reportsBtn = new Button("📈 Reports");
 
+        // ✅ Navigation actions
         registerCustomerBtn.setOnAction(e -> CustomerRegistrationView.show(stage));
+        addProductBtn.setOnAction(e -> ProductView.show(stage));
         newOrderBtn.setOnAction(e -> OrderEntryView.show(stage));
+        viewOrdersBtn.setOnAction(e -> OrderView.show(stage));
+
+        // Other buttons can be added similarly
 
         VBox layout = new VBox(15,
                 title,
                 registerCustomerBtn,
+                addProductBtn,
                 newOrderBtn,
                 viewOrdersBtn,
                 billingBtn,
@@ -38,41 +53,9 @@ public class DashboardView {
         );
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
-        layout.setMinWidth(400);
-
-        Scene scene = new Scene(layout, 500, 450);
-        scene.getStylesheets().add(Objects.requireNonNull(DashboardView.class.getResource("/style.css")).toExternalForm());
-
-        stage.setScene(scene);
-    }
-    public static Parent getView() {
-        Label title = new Label("📊 Shop Dashboard");
-        title.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
-
-        Button registerCustomerBtn = new Button("➕ Register Customer");
-        Button newOrderBtn = new Button("🛒 New Order");
-        Button viewOrdersBtn = new Button("📋 View Orders");
-        Button billingBtn = new Button("💳 Billing");
-        Button deliveryBtn = new Button("🚚 Delivery Status");
-        Button reportsBtn = new Button("📈 Reports");
-
-        registerCustomerBtn.setOnAction(e -> CustomerRegistrationView.show((Stage) title.getScene().getWindow()));
-        newOrderBtn.setOnAction(e -> OrderEntryView.show((Stage) title.getScene().getWindow()));
-
-        VBox layout = new VBox(15,
-                title,
-                registerCustomerBtn,
-                newOrderBtn,
-                viewOrdersBtn,
-                billingBtn,
-                deliveryBtn,
-                reportsBtn
-        );
-        layout.setAlignment(Pos.CENTER);
         layout.setMinWidth(500);
         layout.setMinHeight(500);
 
         return layout;
     }
-
 }

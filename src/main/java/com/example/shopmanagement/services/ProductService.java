@@ -31,6 +31,42 @@ public class ProductService {
         return list;
     }
 
+    public static boolean addProduct(String name, double price) {
+        String sql = "INSERT INTO products(name, price) VALUES (?, ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setDouble(2, price);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to add product: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public static List<Product> fetchAll() {
+        List<Product> list = new ArrayList<>();
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT * FROM products";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getDouble("price"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+//            e.printStackTrace();
+            System.out.println("Fetch Error");
+        }
+        return list;
+    }
+
+
     public static int getProductIdByName(String name) {
         String sql = "SELECT id FROM products WHERE name = ?";
         try (Connection conn = DBConnection.getConnection();

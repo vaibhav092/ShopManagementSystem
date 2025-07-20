@@ -17,5 +17,11 @@ public class Customer {
     public String getName() { return name; }
     public String getContact() { return contact; }
     public String getAddress() { return address; }
+
+    @Override
+    public String toString() {
+        return name; // Or whatever field holds the customer's name
+    }
+
 }
 

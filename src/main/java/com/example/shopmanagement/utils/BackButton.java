@@ -20,7 +20,7 @@ public class BackButton {
     // Use this in any view
     public static HBox getBackButton() {
         Button backBtn = new Button("🔙 Back to Dashboard");
-        backBtn.setStyle("-fx-background-color: #000000; -fx-font-weight: bold;");
+        backBtn.setStyle("-fx-background-color: #1f41e5; -fx-font-weight: bold;");
         backBtn.setOnAction(e -> primaryStage.setScene(dashboardScene));
 
         HBox box = new HBox(backBtn);

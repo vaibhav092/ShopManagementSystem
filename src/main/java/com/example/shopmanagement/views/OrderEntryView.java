@@ -1,6 +1,7 @@
 package com.example.shopmanagement.views;
 
 import com.example.shopmanagement.models.Customer;
+import com.example.shopmanagement.models.OrderItem;
 import com.example.shopmanagement.models.Product;
 import com.example.shopmanagement.services.CustomerService;
 import com.example.shopmanagement.services.OrderService;
@@ -19,24 +20,7 @@ import java.util.List;
 
 public class OrderEntryView {
 
-    public static class OrderItem {
-        int productId;
-        String productName;
-        int quantity;
-        double price;
 
-        public OrderItem(int productId, String productName, int quantity, double price) {
-            this.productId = productId;
-            this.productName = productName;
-            this.quantity = quantity;
-            this.price = price;
-        }
-
-        public int getProductId() { return productId; }
-        public String getProductName() { return productName; }
-        public int getQuantity() { return quantity; }
-        public double getPrice() { return price; }
-    }
 
 
     public static void show(Stage stage) {

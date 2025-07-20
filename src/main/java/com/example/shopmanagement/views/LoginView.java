@@ -32,7 +32,7 @@ public class LoginView {
             boolean success = AuthService.authenticate(username, password);
             if (success) {
                 messageLabel.setText("✅ Login successful!");
-                BackButton.init(stage, new Scene(DashboardView.getView()));
+                BackButton.init(stage, new Scene(DashboardView.getView(stage)));
 
                 DashboardView.show(stage);
             } else {
