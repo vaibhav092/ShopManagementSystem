@@ -1,5 +1,6 @@
 package com.example.shopmanagement.views;
 
+import com.example.shopmanagement.utils.BackButton;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,7 +32,9 @@ public class LoginView {
             boolean success = AuthService.authenticate(username, password);
             if (success) {
                 messageLabel.setText("✅ Login successful!");
-                // TODO: Navigate to dashboard
+                BackButton.init(stage, new Scene(DashboardView.getView()));
+
+                DashboardView.show(stage);
             } else {
                 messageLabel.setText("❌ Invalid username or password");
             }
