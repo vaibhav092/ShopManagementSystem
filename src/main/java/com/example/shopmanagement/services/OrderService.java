@@ -53,6 +53,33 @@ public class OrderService {
 
         return orderId;
     }
+
+    public static void updateStatus(int orderId, String newStatus) {
+        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newStatus);
+            pstmt.setInt(2, orderId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("❌ Failed to update status: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteById(int orderId) {
+        String sql = "DELETE FROM orders WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, orderId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("❌ Failed to delete order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
     public static List<Order> fetchAll() {
         List<Order> orders = new ArrayList<>();
 
