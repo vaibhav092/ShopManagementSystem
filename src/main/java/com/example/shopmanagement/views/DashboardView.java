@@ -38,7 +38,7 @@ public class DashboardView {
         addProductBtn.setOnAction(e -> ProductView.show(stage));
         newOrderBtn.setOnAction(e -> OrderEntryView.show(stage));
         viewOrdersBtn.setOnAction(e -> OrderView.show(stage));
-
+        billingBtn.setOnAction(e->BillingView.show(stage));
         // Other buttons can be added similarly
 
         VBox layout = new VBox(15,
