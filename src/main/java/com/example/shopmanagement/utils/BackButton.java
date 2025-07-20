@@ -1,27 +1,35 @@
 package com.example.shopmanagement.utils;
 
+import com.example.shopmanagement.views.DashboardView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class BackButton {
 
     private static Stage primaryStage;
-    private static Scene dashboardScene;
 
-    // Call this once during app start (e.g., from Main)
-    public static void init(Stage stage, Scene dashboard) {
+    // Just save the stage; no need to store a static Scene
+// Correct version now only accepts Stage
+    public static void init(Stage stage) {
         primaryStage = stage;
-        dashboardScene = dashboard;
     }
+
 
     // Use this in any view
     public static HBox getBackButton() {
         Button backBtn = new Button("🔙 Back to Dashboard");
-        backBtn.setStyle("-fx-background-color: #1f41e5; -fx-font-weight: bold;");
-        backBtn.setOnAction(e -> primaryStage.setScene(dashboardScene));
+        backBtn.setStyle("-fx-background-color: #1f41e5; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-radius: 8px;");
+
+        backBtn.setOnAction(e -> {
+            Scene scene = new Scene(DashboardView.getView(primaryStage), 800, 600);
+            scene.getStylesheets().add(Objects.requireNonNull(DashboardView.class.getResource("/style.css")).toExternalForm());
+            primaryStage.setScene(scene);
+        });
 
         HBox box = new HBox(backBtn);
         box.setAlignment(Pos.TOP_LEFT);

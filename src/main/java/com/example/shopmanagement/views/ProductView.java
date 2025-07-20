@@ -88,7 +88,7 @@ public class ProductView {
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
 
-        Scene scene = new Scene(layout, 500, 600);
+        Scene scene = new Scene(layout, 800, 800);
         scene.getStylesheets().add(ProductView.class.getResource("/style.css").toExternalForm());
         stage.setScene(scene);
     }

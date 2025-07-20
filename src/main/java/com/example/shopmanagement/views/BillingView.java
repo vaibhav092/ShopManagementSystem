@@ -95,7 +95,7 @@ public class BillingView {
         );
         layout.setStyle("-fx-padding: 20;");
 
-        Scene scene = new Scene(layout, 700, 550);
+        Scene scene = new Scene(layout, 800, 750);
         scene.getStylesheets().add(BillingView.class.getResource("/style.css").toExternalForm());
 
         stage.setScene(scene);

@@ -16,7 +16,7 @@ public class Main extends Application {
         DBConnection.getConnection(); // just for logging
 
         // Initialize back button with dummy scene for now
-        BackButton.init(primaryStage, new Scene(new VBox()));
+        BackButton.init(primaryStage);
 
         // Start from Login screen
         LoginView.show(primaryStage);

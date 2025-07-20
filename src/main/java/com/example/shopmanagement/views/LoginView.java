@@ -32,8 +32,7 @@ public class LoginView {
             boolean success = AuthService.authenticate(username, password);
             if (success) {
                 messageLabel.setText("✅ Login successful!");
-                BackButton.init(stage, new Scene(DashboardView.getView(stage)));
-
+                BackButton.init(stage);
                 DashboardView.show(stage);
             } else {
                 messageLabel.setText("❌ Invalid username or password");
@@ -44,7 +43,7 @@ public class LoginView {
         layout.setAlignment(Pos.CENTER);
         layout.setMinWidth(300);
 
-        Scene scene = new Scene(layout, 500, 500);
+        Scene scene = new Scene(layout, 600, 600);
         scene.getStylesheets().add(Objects.requireNonNull(LoginView.class.getResource("/style.css")).toExternalForm());
 
         stage.setScene(scene);

@@ -30,7 +30,6 @@ public class DashboardView {
         Button newOrderBtn = new Button("🛒 New Order");
         Button viewOrdersBtn = new Button("📋 View Orders");
         Button billingBtn = new Button("💳 Billing");
-        Button deliveryBtn = new Button("🚚 Delivery Status");
         Button reportsBtn = new Button("📈 Reports");
 
         // ✅ Navigation actions
@@ -39,7 +38,7 @@ public class DashboardView {
         newOrderBtn.setOnAction(e -> OrderEntryView.show(stage));
         viewOrdersBtn.setOnAction(e -> OrderView.show(stage));
         billingBtn.setOnAction(e->BillingView.show(stage));
-        // Other buttons can be added similarly
+        reportsBtn.setOnAction(e -> ReportsView.show(stage));
 
         VBox layout = new VBox(15,
                 title,
@@ -48,13 +47,12 @@ public class DashboardView {
                 newOrderBtn,
                 viewOrdersBtn,
                 billingBtn,
-                deliveryBtn,
                 reportsBtn
         );
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
-        layout.setMinWidth(500);
-        layout.setMinHeight(500);
+        layout.setMinWidth(800);
+        layout.setMinHeight(800);
 
         return layout;
     }

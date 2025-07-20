@@ -144,7 +144,7 @@ public class OrderEntryView {
         VBox form = new VBox(10, BackButton.getBackButton(),title, customerCombo, statusBox,productCombo, quantityField, priceField, addItemButton, orderTable, saveOrderButton);
         form.setPadding(new Insets(20));
 
-        Scene scene = new Scene(form, 600, 550);
+        Scene scene = new Scene(form, 800, 800);
         scene.getStylesheets().add(OrderEntryView.class.getResource("/style.css").toExternalForm());
 
         stage.setScene(scene);

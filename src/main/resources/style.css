@@ -1,32 +1,101 @@
+/* === Global Styling === */
+
 .root {
-    -fx-background-color: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
-    -fx-padding: 20;
-    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-background-color: #f8fafc;
+    -fx-padding: 20px;
 }
 
-.label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #333;
+/* === Headings === */
+.label.heading {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e293b;
 }
 
+/* === Section Cards === */
+.section {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-border-color: #e2e8f0;
+    -fx-padding: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 1, 1);
+}
+
+/* === Buttons === */
 .button {
-    -fx-background-color: #2196F3;
+    -fx-background-color: #3b82f6;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-padding: 8 16;
-    -fx-background-radius: 8;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 18px;
     -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-background-color: #1976D2;
+    -fx-background-color: #2563eb;
 }
 
-.text-field, .password-field {
+/* === Table Styling === */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 10px 10px 0 0;
+}
+
+.table-view .table-cell {
+    -fx-padding: 10px;
     -fx-font-size: 14px;
-    -fx-pref-width: 250px;
-    -fx-padding: 6;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-color: #ccc;
+    -fx-text-fill: #334155;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e293b;
+}
+
+/* === Form Fields === */
+.text-field, .password-field, .combo-box {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #cbd5e1;
+}
+
+/* === Labels === */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #475569;
+}
+
+/* === Invoice Total === */
+.total-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+
+/* === Status Dropdown === */
+.combo-box {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #cbd5e1;
+}
+
+.combo-box:hover {
+    -fx-background-color: #e2e8f0;
+}
+
+/* === Back Button Section === */
+.back-button {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 15 0;
 }
