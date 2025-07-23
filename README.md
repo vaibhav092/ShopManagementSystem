@@ -72,7 +72,6 @@ To set up the database, execute the `schema.sql` script located in the `src/main
 
     -   Java 17 JDK
     -   MySQL 8.0+
-    -   Maven
 
 2.  **Setup Database**:
 
@@ -84,7 +83,7 @@ To set up the database, execute the `schema.sql` script located in the `src/main
 
 3.  **Configure DB Connection**:
 
-    Edit `DBConnection.java` with your MySQL credentials:
+    Edit `utils/DBConnection.java` with your MySQL credentials:
 
     ```java
     private static final String URL = "jdbc:mysql://localhost:3306/shop_management";
