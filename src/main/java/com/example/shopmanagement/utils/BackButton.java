@@ -26,7 +26,7 @@ public class BackButton {
         backBtn.setStyle("-fx-background-color: #1f41e5; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-radius: 8px;");
 
         backBtn.setOnAction(e -> {
-            Scene scene = new Scene(DashboardView.getView(primaryStage), 800, 600);
+            Scene scene = new Scene(DashboardView.getView(primaryStage), 700, 700);
             scene.getStylesheets().add(Objects.requireNonNull(DashboardView.class.getResource("/style.css")).toExternalForm());
             primaryStage.setScene(scene);
         });
