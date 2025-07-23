@@ -4,11 +4,14 @@ import com.example.shopmanagement.models.BillingItem;
 import com.example.shopmanagement.services.BillingService;
 import com.example.shopmanagement.utils.BackButton;
 import javafx.collections.FXCollections;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
 
 import java.util.List;
 
@@ -57,6 +60,39 @@ public class BillingView {
         Label totalLabel = new Label("💰 Total Amount: ₹0.00");
         totalLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
+        // Add Print Button
+        Button printButton = new Button("🖨️ Print Bill");
+        printButton.setStyle("-fx-font-size: 14px;");
+
+        // Footer for invoice
+        Label footer = new Label("Thank you for shopping with us! 🛍️");
+        footer.setStyle("-fx-font-size: 12px; -fx-padding: 20 0 10 0;");
+        footer.setAlignment(Pos.CENTER);
+
+        // Separate content for printing (without back button)
+        VBox printableContent = new VBox(15);
+        printableContent.setStyle("-fx-padding: 20; -fx-background-color: white;");
+        printableContent.getChildren().addAll(
+            heading,
+            orderInfoBox,
+            table,
+            totalLabel,
+            footer
+        );
+        printableContent.setMinWidth(650); // Good width for A4 paper
+
+        // Main layout including back button and print button
+        VBox layout = new VBox(15,
+                BackButton.getBackButton(),
+                heading,
+                inputBox,
+                orderInfoBox,
+                table,
+                totalLabel,
+                printButton
+        );
+        layout.setStyle("-fx-padding: 20;");
+
         // Load Bill button action
         loadButton.setOnAction(e -> {
             String input = orderIdField.getText();
@@ -85,20 +121,47 @@ public class BillingView {
             statusLabel.setText("📦 Status: " + sample.getStatus());
         });
 
-        VBox layout = new VBox(15,
-                BackButton.getBackButton(),
-                heading,
-                inputBox,
-                orderInfoBox,
-                table,
-                totalLabel
-        );
-        layout.setStyle("-fx-padding: 20;");
+        // Print Button action
+        printButton.setOnAction(e -> {
+            if (table.getItems() == null || table.getItems().isEmpty()) {
+                showAlert("No Data", "Please load an order first before printing.");
+                return;
+            }
+            printBill(stage, printableContent);
+        });
 
         Scene scene = new Scene(layout, 700, 700); // Changed from 800, 750
         scene.getStylesheets().add(BillingView.class.getResource("/style.css").toExternalForm());
 
         stage.setScene(scene);
+    }
+
+    /**
+     * Handles the printing of the bill
+     */
+    private static void printBill(Stage stage, Node contentToPrint) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job == null) {
+            showAlert("Printer Error", "No printer found or printer unavailable.");
+            return;
+        }
+
+        boolean proceed = job.showPrintDialog(stage);
+        if (proceed) {
+            // Set print job properties
+            job.getJobSettings().setJobName("Invoice - Order");
+
+            // Print the content
+            boolean printed = job.printPage(contentToPrint);
+            
+            if (printed) {
+                job.endJob();
+                showAlert("Success", "Bill printed successfully! 🖨️");
+            } else {
+                job.cancelJob();
+                showAlert("Error", "Printing failed. Please try again.");
+            }
+        }
     }
 
     private static void showAlert(String title, String message) {
