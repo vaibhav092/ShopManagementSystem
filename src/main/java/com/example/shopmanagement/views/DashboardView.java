@@ -15,7 +15,7 @@ public class DashboardView {
 
     // Used when directly showing from Main or after login
     public static void show(Stage stage) {
-        Scene scene = new Scene(getView(stage), 500, 450);
+        Scene scene = new Scene(getView(stage), 700, 700); // Changed from 500, 450
         scene.getStylesheets().add(Objects.requireNonNull(DashboardView.class.getResource("/style.css")).toExternalForm());
         stage.setScene(scene);
     }
@@ -51,8 +51,8 @@ public class DashboardView {
         );
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
-        layout.setMinWidth(800);
-        layout.setMinHeight(800);
+        layout.setMinWidth(700);  // Changed from 800
+        layout.setMinHeight(700); // Changed from 800
 
         return layout;
     }

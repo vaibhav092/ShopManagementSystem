@@ -98,7 +98,7 @@ public class CustomerRegistrationView {
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.TOP_CENTER);
 
-        Scene scene = new Scene(layout, 800, 800);
+        Scene scene = new Scene(layout, 700, 700); // Changed from 800, 800
         scene.getStylesheets().add(CustomerRegistrationView.class.getResource("/style.css").toExternalForm());
 
         stage.setScene(scene);

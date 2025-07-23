@@ -43,7 +43,7 @@ public class LoginView {
         layout.setAlignment(Pos.CENTER);
         layout.setMinWidth(300);
 
-        Scene scene = new Scene(layout, 600, 600);
+        Scene scene = new Scene(layout, 700, 700); // Changed from 600, 600
         scene.getStylesheets().add(Objects.requireNonNull(LoginView.class.getResource("/style.css")).toExternalForm());
 
         stage.setScene(scene);
