@@ -70,16 +70,7 @@ public class BillingView {
         footer.setAlignment(Pos.CENTER);
 
         // Separate content for printing (without back button)
-        VBox printableContent = new VBox(15);
-        printableContent.setStyle("-fx-padding: 20; -fx-background-color: white;");
-        printableContent.getChildren().addAll(
-            heading,
-            orderInfoBox,
-            table,
-            totalLabel,
-            footer
-        );
-        printableContent.setMinWidth(650); // Good width for A4 paper
+// Good width for A4 paper
 
         // Main layout including back button and print button
         VBox layout = new VBox(15,
@@ -127,6 +118,18 @@ public class BillingView {
                 showAlert("No Data", "Please load an order first before printing.");
                 return;
             }
+
+            // Create fresh printable content each time
+            VBox printableContent = createPrintableContent(
+                    heading.getText(),
+                    orderIdLabel.getText(),
+                    customerLabel.getText(),
+                    dateLabel.getText(),
+                    statusLabel.getText(),
+                    table.getItems(),
+                    totalLabel.getText()
+            );
+
             printBill(stage, printableContent);
         });
 
@@ -136,9 +139,59 @@ public class BillingView {
         stage.setScene(scene);
     }
 
-    /**
-     * Handles the printing of the bill
-     */
+    private static VBox createPrintableContent(String headingText, String orderId, String customer,
+                                               String date, String status,
+                                               List<BillingItem> items, String totalText) {
+        Label heading = new Label(headingText);
+        heading.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+        Label orderIdLabel = new Label(orderId);
+        Label customerLabel = new Label(customer);
+        Label dateLabel = new Label(date);
+        Label statusLabel = new Label(status);
+
+        VBox orderInfoBox = new VBox(5, orderIdLabel, customerLabel, dateLabel, statusLabel);
+        orderInfoBox.setStyle("-fx-padding: 10; -fx-background-color: #f9f9f9; -fx-border-color: #ccc;");
+
+        // Table setup for printable content
+        TableView<BillingItem> table = new TableView<>();
+
+        TableColumn<BillingItem, String> nameCol = new TableColumn<>("Product");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+        TableColumn<BillingItem, Integer> quantityCol = new TableColumn<>("Quantity");
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+        TableColumn<BillingItem, Double> priceCol = new TableColumn<>("Price");
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        TableColumn<BillingItem, Double> subtotalCol = new TableColumn<>("Subtotal");
+        subtotalCol.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
+
+        table.getColumns().addAll(nameCol, quantityCol, priceCol, subtotalCol);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setItems(FXCollections.observableArrayList(items));
+
+        Label totalLabel = new Label(totalText);
+        totalLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Label footer = new Label("Thank you for shopping with us! 🛍️");
+        footer.setStyle("-fx-font-size: 12px; -fx-padding: 20 0 10 0;");
+        footer.setAlignment(Pos.CENTER);
+
+        VBox printableContent = new VBox(15);
+        printableContent.setStyle("-fx-padding: 20; -fx-background-color: white;");
+        printableContent.getChildren().addAll(
+                heading,
+                orderInfoBox,
+                table,
+                totalLabel,
+                footer
+        );
+        printableContent.setMinWidth(650);
+
+        return printableContent;
+    }
     private static void printBill(Stage stage, Node contentToPrint) {
         PrinterJob job = PrinterJob.createPrinterJob();
         if (job == null) {
